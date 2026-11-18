@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SailCloth Studios</title>
+  <meta name="description" content="SailCloth Studios designs and builds modern websites for small businesses.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="#top" class="brand" aria-label="SailCloth Studios home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v17M8 3c5 4 9 9 10 15H8z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 20h18l-2 2.5H5z" fill="currentColor"/></svg>
+      <span>SailCloth<em>Studios</em></span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#why">Why us</a></li>
+        <li><a href="#contact" class="btn btn-small">Start a project</a></li>
+      </ul>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- THE BOAT (fixed, driven by scroll) -->
+  <div class="boat" id="boat">
+    <div class="boat-inner">
+      <svg viewBox="0 0 400 520" class="boat-svg" aria-hidden="true">
+        <defs>
+          <clipPath id="sailClip">
+            <path d="M70 26 C 210 130, 340 280, 376 414 L70 414 Z"/>
+          </clipPath>
+          <linearGradient id="sailShade" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#fffdf8"/>
+            <stop offset="1" stop-color="#efe8db"/>
+          </linearGradient>
+        </defs>
+        <!-- mast -->
+        <rect x="60" y="8" width="8" height="430" rx="4" class="wood"/>
+        <!-- flag -->
+        <path d="M68 10 L102 20 L68 30 Z" class="flag"/>
+        <!-- sail -->
+        <path d="M70 26 C 210 130, 340 280, 376 414 L70 414 Z" fill="url(#sailShade)" class="sail"/>
+        <g clip-path="url(#sailClip)" class="seams" id="seams">
+          <path d="M70 110 L400 92"/>
+          <path d="M70 190 L400 170"/>
+          <path d="M70 270 L400 248"/>
+          <path d="M70 350 L400 326"/>
+        </g>
+        <!-- boom -->
+        <rect x="52" y="414" width="336" height="9" rx="4.5" class="wood"/>
+        <!-- hull + water (hidden on the landing page, revealed on scroll) -->
+        <g id="hull">
+        <path d="M14 440 L392 440 Q378 476 334 498 L94 498 Q48 484 14 440 Z" class="hull"/>
+        <path d="M30 452 L380 452" class="hull-stripe"/>
+        <!-- water -->
+        <g class="waves">
+          <path d="M0 506 q 25 -10 50 0 t 50 0 t 50 0 t 50 0 t 50 0 t 50 0 t 50 0 t 50 0"/>
+          <path d="M40 518 q 20 -8 40 0 t 40 0 t 40 0 t 40 0 t 40 0 t 40 0 t 40 0" opacity=".55"/>
+        </g>
+        </g>
+      </svg>
+
+      <!-- text written on the sail -->
+      <div class="sail-text" id="sailText">
+        <p class="sail-eyebrow" id="sailEyebrow">Web design studio</p>
+        <h1>SailCloth<br>Studios</h1>
+        <p class="sail-tag" id="sailTag">Modern websites that help small businesses catch the wind.</p>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- 0 · HERO -->
+    <section class="panel hero" id="top" data-scene>
+      <div class="copy right">
+        <p class="eyebrow">For small businesses &amp; growing companies</p>
+        <p class="lead">We design, build and look after websites that look sharp, load fast and turn visitors into customers — without the agency price tag or the jargon.</p>
+        <div class="actions">
+          <a href="#contact" class="btn">Start a project</a>
+          <a href="#services" class="btn btn-ghost">See what we do</a>
+        </div>
+      </div>
+      <a href="#services" class="scroll-cue" aria-label="Scroll to services">
+        <span>Scroll to set sail</span><i></i>
+      </a>
+    </section>
+
+    <!-- 1 · SERVICES (light blue, boat on the right) -->
+    <section class="panel" id="services" data-scene>
+      <div class="copy left reveal">
+        <p class="eyebrow">01 — Services</p>
+        <h2>Everything your business needs to get online and get noticed.</h2>
+        <ul class="cards">
+          <li>
+            <h3>Website design</h3>
+            <p>A custom look built around your brand and your customers — never a cookie-cutter template.</p>
+          </li>
+          <li>
+            <h3>Development</h3>
+            <p>Fast, mobile-first sites that are easy to update and built to show up in search.</p>
+          </li>
+          <li>
+            <h3>Launch &amp; care</h3>
+            <p>Domains, hosting, updates and tweaks handled for you, so you can focus on running the business.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2 · PROCESS (deeper blue, boat moves diagonally down-left) -->
+    <section class="panel" id="process" data-scene>
+      <div class="copy right reveal">
+        <p class="eyebrow">02 — Process</p>
+        <h2>A clear course from first chat to launch day.</h2>
+        <ol class="steps">
+          <li><span>Chart</span> We learn your business, your customers and your goals.</li>
+          <li><span>Design</span> You see real page designs and shape them with us.</li>
+          <li><span>Build</span> We turn the design into a fast, polished, working site.</li>
+          <li><span>Launch</span> We go live, then keep everything shipshape.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3 · WORK (mid blue, boat moves diagonally up-right) -->
+    <section class="panel" id="work" data-scene>
+      <div class="copy left reveal">
+        <p class="eyebrow">03 — Our work</p>
+        <h2>Sample sites you can click through.</h2>
+        <p class="lead">Three made-up businesses, three working websites. Place an order, book a haircut or RSVP to an event. Nothing gets sent anywhere, so try everything.</p>
+        <div class="demos">
+          <a class="demo-card" href="demos/food-truck/index.html" target="_blank" rel="noopener">
+            <img src="img/previews/food-truck.jpg" alt="Smoke &amp; Salsa website preview" loading="lazy">
+            <div>
+              <span class="demo-type">Food truck · Restaurant</span>
+              <h3>Smoke &amp; Salsa</h3>
+              <p>Online ordering, a weekly truck schedule and catering quotes.</p>
+              <span class="demo-go">Open the demo ↗</span>
+            </div>
+          </a>
+          <a class="demo-card" href="demos/church/index.html" target="_blank" rel="noopener">
+            <img src="img/previews/church.jpg" alt="Grace Harbor Church website preview" loading="lazy">
+            <div>
+              <span class="demo-type">Church · Nonprofit</span>
+              <h3>Grace Harbor Church</h3>
+              <p>Plan-a-visit form, sermon library, event RSVPs and online giving.</p>
+              <span class="demo-go">Open the demo ↗</span>
+            </div>
+          </a>
+          <a class="demo-card" href="demos/barbershop/index.html" target="_blank" rel="noopener">
+            <img src="img/previews/barbershop.jpg" alt="Oak &amp; Iron Barber Co. website preview" loading="lazy">
+            <div>
+              <span class="demo-type">Barber · Salon · Appointments</span>
+              <h3>Oak &amp; Iron Barber Co.</h3>
+              <p>Customers pick a service, a barber and a time, then add it to their calendar.</p>
+              <span class="demo-go">Open the demo ↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · WHY US (dark blue, boat moves diagonally down-left) -->
+    <section class="panel dark" id="why" data-scene>
+      <div class="copy right reveal">
+        <p class="eyebrow">04 — Why SailCloth</p>
+        <h2>Small studio. Made for small business.</h2>
+        <div class="why-grid">
+          <div><h3>Plain-English pricing</h3><p>Fixed quotes up front, so there are no surprises halfway through.</p></div>
+          <div><h3>One crew, start to finish</h3><p>You work with the same people who design and build your site.</p></div>
+          <div><h3>Built to grow</h3><p>Start simple and add booking, shops or blogs as your business grows.</p></div>
+          <div><h3>Yours to keep</h3><p>You own your site, your domain and your content. Always.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · CONTACT (deep navy, boat sails off up-right) -->
+    <section class="panel dark" id="contact" data-scene>
+      <div class="copy left reveal">
+        <p class="eyebrow">05 — Contact</p>
+        <h2>Ready to raise the sails?</h2>
+        <p class="lead">Tell us a little about your business and we'll get back to you with ideas and a straightforward quote.</p>
+        <form class="contact-form" id="contactForm">
+          <div class="row">
+            <label>Name<input type="text" name="name" required autocomplete="name"></label>
+            <label>Email<input type="email" name="email" required autocomplete="email"></label>
+          </div>
+          <label>Business name<input type="text" name="business" autocomplete="organization"></label>
+          <label>What do you need?<textarea name="message" rows="3"></textarea></label>
+          <button type="submit" class="btn">Send message</button>
+          <p class="form-note" id="formNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> SailCloth Studios</span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
