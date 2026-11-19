@@ -123,7 +123,8 @@
 
     // text on the sail fades out first, then the hull and water fade in as we zoom out
     sailText.style.opacity = Math.max(0, 1 - progress * 3);
-    hull.style.opacity = Math.min(1, Math.max(0, (progress - 0.25) * 2.5));
+    // on phones the boat fades into the background quickly, so show the hull sooner
+    hull.style.opacity = Math.min(1, Math.max(0, isMobile ? progress * 6 : (progress - 0.25) * 2.5));
     seams.style.opacity = Math.min(1, Math.max(0, (progress - 0.2) * 2.5));
   }
 
