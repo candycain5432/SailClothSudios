@@ -11,13 +11,23 @@
   // Landing page: zoomed right in on the sail, mast near the left edge, boom just
   // below the fold so the hull is out of view. Returns centre (px) + scale.
   // Sail geometry in the SVG (400x520): mast x=64, boom y=414, sail ~0.97 * width tall.
+  let lastSailBottom = 0;
+  // Phone browsers change innerHeight as the address bar shows and hides; the
+  // landing-page layout uses the height from load (or rotation) so it doesn't jump.
+  let stableVh = window.innerHeight, stableVw = window.innerWidth;
+
   function heroFrame(vw, vh, W, isMobile) {
     const H = W * 1.3;
     let WS, boomY, mastX;
     if (isMobile) {
-      WS = Math.min(vw * 1.12, (vh * 0.55) / 0.97); // scaled boat width
+      // the sail fills the top of the screen; the intro text starts below the boom
+      WS = Math.min(vw * 1.12, (vh * 0.6) / 0.97); // scaled boat width
       mastX = vw * 0.03;
-      boomY = 80 + 0.97 * WS;
+      boomY = 100 + 0.97 * WS;
+      if (boomY !== lastSailBottom) {
+        lastSailBottom = boomY;
+        document.documentElement.style.setProperty('--sail-bottom', `${Math.round(boomY)}px`);
+      }
     } else {
       // fit the whole sail (flag to boom) between the nav and the bottom edge
       WS = Math.min(vw * 0.6, (vh - 90) / 1.01);
@@ -38,14 +48,14 @@
     { x: 25, y: 60, s: 0.74, r: -3, o: 1 },
     { x: 74, y: 56, s: 0.80, r: 3,  o: 1 },
   ];
-  // Mobile: same journey, but the boat sits behind the text, faded
+  // Mobile: same journey, but the boat sails faintly behind the text
   const mobile = [
     { x: 50, y: 37, s: 1.00, r: 0,  o: 1 },
-    { x: 82, y: 50, s: 0.80, r: 3,  o: 0.35 },
-    { x: 22, y: 62, s: 0.70, r: -4, o: 0.35 },
-    { x: 80, y: 38, s: 0.60, r: 4,  o: 0.35 },
-    { x: 24, y: 66, s: 0.52, r: -3, o: 0.35 },
-    { x: 78, y: 60, s: 0.70, r: 3,  o: 0.35 },
+    { x: 78, y: 55, s: 0.70, r: 3,  o: 0.2 },
+    { x: 24, y: 58, s: 0.66, r: -4, o: 0.2 },
+    { x: 76, y: 52, s: 0.66, r: 4,  o: 0.2 },
+    { x: 24, y: 58, s: 0.66, r: -3, o: 0.2 },
+    { x: 76, y: 56, s: 0.70, r: 3,  o: 0.2 },
   ];
 
   const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
@@ -71,7 +81,7 @@
     const isMobile = vw <= 820;
     const W = boat.offsetWidth, h = boat.offsetHeight;
     const frames = (isMobile ? mobile : desktop).map(f => ({ ...f, x: f.x / 100 * vw, y: f.y / 100 * vh }));
-    frames[0] = heroFrame(vw, vh, W, isMobile);
+    frames[0] = heroFrame(vw, isMobile ? stableVh : vh, W, isMobile);
 
     // which scene are we in, and how far toward the next one?
     let i = 0;
@@ -97,7 +107,9 @@
       r += dir * 7 * bump;
     }
     boat.style.transform = `translate3d(${x - W / 2}px, ${cy - h / 2}px, 0) scale(${s}) rotate(${r}deg)`;
-    boat.style.opacity = lerp(a.o, b.o, t);
+    // fade quickly when leaving the landing page so the boat isn't solid behind text
+    const ot = a.o > b.o ? Math.min(1, t * 2.5) : t;
+    boat.style.opacity = lerp(a.o, b.o, ot);
 
     // background colour
     const c = rgb[i].map((v, k) => Math.round(lerp(v, rgb[j][k], t)));
@@ -120,7 +132,14 @@
     if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { measure(); update(); });
+  window.addEventListener('resize', () => {
+    // only a width change (rotation, desktop resize) counts as a real resize;
+    // the phone address bar sliding in and out changes the height only
+    if (window.innerWidth !== stableVw || window.innerWidth > 820) {
+      stableVw = window.innerWidth; stableVh = window.innerHeight;
+    }
+    measure(); update();
+  });
   window.addEventListener('load', () => { measure(); update(); });
   measure(); update();
 
